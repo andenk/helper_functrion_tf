@@ -103,8 +103,40 @@ def load_and_prep_image(filename, img_shape=224):
   # Rescale the image (get all values between 0 and 1)
   img = img/255.
   return img
+import os
 
+def walk_through_dir(dir_path):
+  """
+  Walks through dir_path returning its contents.
+  Args:
+    dir_path (str): target directory
+  
+  Returns:
+    A print out of:
+      number of subdiretories in dir_path
+      number of images (files) in each subdirectory
+      name of each subdirectory
+  """
+  for dirpath, dirnames, filenames in os.walk(dir_path):
+    print(f"There are {len(dirnames)} directories and {len(filenames)} images in '{dirpath}'.")
+    
+import zipfile
+
+def unzip_data(filename):
+  """
+  Unzips filename into the current working directory.
+  Args:
+    filename (str): a filepath to a target zip folder to be unzipped.
+  """
+  zip_ref = zipfile.ZipFile(filename, "r")
+  zip_ref.extractall()
+  zip_ref.close()
+
+# Walk through an image classification directory and find out how many files (images)
+# are in each subdirectory.
 # Adjust function to work with multi-class
+
+
 def pred_and_plot(model, filename, class_names):
   """
   Imports an image located at filename, makes a prediction on it with
@@ -197,36 +229,3 @@ def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10, 10), text_s
   # Save the figure to the current working directory
   if savefig:
     fig.savefig("confusion_matrix.png")
-
-
-import zipfile
-
-def unzip_data(filename):
-  """
-  Unzips filename into the current working directory.
-  Args:
-    filename (str): a filepath to a target zip folder to be unzipped.
-  """
-  zip_ref = zipfile.ZipFile(filename, "r")
-  zip_ref.extractall()
-  zip_ref.close()
-
-# Walk through an image classification directory and find out how many files (images)
-# are in each subdirectory.
-import os
-
-def walk_through_dir(dir_path):
-  """
-  Walks through dir_path returning its contents.
-  Args:
-    dir_path (str): target directory
-  
-  Returns:
-    A print out of:
-      number of subdiretories in dir_path
-      number of images (files) in each subdirectory
-      name of each subdirectory
-  """
-  for dirpath, dirnames, filenames in os.walk(dir_path):
-    print(f"There are {len(dirnames)} directories and {len(filenames)} images in '{dirpath}'.")
-    
