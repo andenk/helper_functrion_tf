@@ -29,8 +29,10 @@ def create_model(model_url, num_classes=10):
   return model
   
 
-  import matplotlib.pyplot as plt
-
+import matplotlib.pyplot as plt
+import itertools
+import numpy as np
+from sklearn.metrics import confusion_matrix
 # Plot the validation and training data separately
 def plot_loss_curves(history):
   """
