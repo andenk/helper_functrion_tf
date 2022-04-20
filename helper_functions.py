@@ -31,10 +31,18 @@ import numpy as np
 from sklearn.metrics import confusion_matrix
 
 # Our function needs a different name to sklearn's plot_confusion_matrix
+import itertools
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.metrics import confusion_matrix
+
+# Our function needs a different name to sklearn's plot_confusion_matrix
 def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10, 10), text_size=15, norm=False, savefig=False): 
   """Makes a labelled confusion matrix comparing predictions and ground truth labels.
+
   If classes is passed, confusion matrix will be labelled, if not, integer class values
   will be used.
+
   Args:
     y_true: Array of truth labels (must be same shape as y_pred).
     y_pred: Array of predicted labels (must be same shape as y_true).
@@ -46,6 +54,7 @@ def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10, 10), text_s
   
   Returns:
     A labelled confusion matrix plot comparing y_true and y_pred.
+
   Example usage:
     make_confusion_matrix(y_true=test_labels, # ground truth test labels
                           y_pred=y_preds, # predicted labels
@@ -82,6 +91,10 @@ def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10, 10), text_s
   ax.xaxis.set_label_position("bottom")
   ax.xaxis.tick_bottom()
 
+  ### Added: Rotate xticks for readability & increase font size (required due to such a large confusion matrix)
+  plt.xticks(rotation=70, fontsize=text_size)
+  plt.yticks(fontsize=text_size)
+
   # Set the threshold for different colors
   threshold = (cm.max() + cm.min()) / 2.
 
@@ -101,7 +114,6 @@ def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10, 10), text_s
   # Save the figure to the current working directory
   if savefig:
     fig.savefig("confusion_matrix.png")
-  
 # Make a function to predict on images and plot them (works with multi-class)
 def pred_and_plot(model, filename, class_names):
   """
