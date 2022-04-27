@@ -326,3 +326,20 @@ def calculate_results(y_true, y_pred):
     plt.title('Training and Validation Loss')
     plt.xlabel('epoch')
     plt.show()
+from matplotlib import cm
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+def print_test_values(y):
+  df = pd.DataFrame(y)
+  cmap = cm.get_cmap('Spectral') # Colour map (there are many others)
+
+  fig, ax = plt.subplots(1)
+  # Now here's the plot. range(len(df)) just makes the x values 1, 2, 3...
+  # df[0] is then the y values. c sets the colours (same as y values in this
+  # case). s is the marker size.
+  plt.title("Printa sanna värden")
+  plt.xlabel("Antal värden")
+  plt.ylabel("Sant värde")
+  ax.scatter(range(len(df)), df[0], c=df[0], s=120, cmap=cmap, edgecolor='None')
+  plt.show()
