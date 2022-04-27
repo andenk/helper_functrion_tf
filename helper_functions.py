@@ -1,21 +1,5 @@
 import tensorflow as tf
-from matplotlib import cm
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-def print_test_values(y):
-  df = pd.DataFrame(y)
-  cmap = cm.get_cmap('Spectral') # Colour map (there are many others)
 
-  fig, ax = plt.subplots(1)
-  # Now here's the plot. range(len(df)) just makes the x values 1, 2, 3...
-  # df[0] is then the y values. c sets the colours (same as y values in this
-  # case). s is the marker size.
-  plt.title("Printa sanna värden")
-  plt.xlabel("Antal värden")
-  plt.ylabel("Sant värde")
-  ax.scatter(range(len(df)), df[0], c=df[0], s=120, cmap=cmap, edgecolor='None')
-  plt.show()
 # Create a function to import an image and resize it to be able to be used with our model
 def load_and_prep_image(filename, img_shape=224, scale=True):
   """
@@ -342,3 +326,27 @@ def compare_historys(original_history, new_history, initial_epochs=5):
   plt.title('Training and Validation Loss')
   plt.xlabel('epoch')
   plt.show()
+from matplotlib import cm
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+def print_test_values(y):
+  """
+  Skicka in test Y sa far du en graf med vardena i ordning som de ligger
+  alt1 skicka in sanna varden 
+  alt2 skicka in predictade varden 
+  """
+  df = pd.DataFrame(y)
+  cmap = cm.get_cmap('Spectral') # Colour map (there are many others)
+
+  fig, ax = plt.subplots(1)
+  # Now here's the plot. range(len(df)) just makes the x values 1, 2, 3...
+  # df[0] is then the y values. c sets the colours (same as y values in this
+  # case). s is the marker size.
+  plt.title("Printa")
+  plt.xlabel("Antal")
+  plt.ylabel("Values")
+  ax.scatter(range(len(df)), df[0], c=df[0], s=120, cmap=cmap, edgecolor='None')
+  plt.show()
+def hej():
+  print("hej")
